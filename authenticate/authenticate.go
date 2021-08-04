@@ -9,7 +9,6 @@ import (
 
 	"github.com/iamport/go-iamport/util"
 	"github.com/iamport/interface/gen_src/go/v1/authenticate"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 const (
@@ -89,7 +88,7 @@ func (a *Authenticate) RequestToken() error {
 	}
 
 	tokenRes := authenticate.TokenResponse{}
-	err = protojson.Unmarshal(res, &tokenRes)
+	err = util.Unmarshaler.Unmarshal(res, &tokenRes)
 	if err != nil {
 		return err
 	}
