@@ -41,7 +41,7 @@ func GetByImpUID(client *http.Client, apiDomain string, token string, params *pa
 	}
 
 	paymentRes := payment.PaymentResponse{}
-	err = protojson.Unmarshal(res, &paymentRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentRes)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func GetByImpUIDs(client *http.Client, apiDomain string, token string, params *p
 	}
 
 	paymentsRes := payment.PaymentsResponse{}
-	err = protojson.Unmarshal(res, &paymentsRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentsRes)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func GetByMerchantUID(client *http.Client, apiDomain string, token string, param
 	}
 
 	paymentRes := payment.PaymentMerchantUidResponse{}
-	err = protojson.Unmarshal(res, &paymentRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentRes)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ func GetByMerchantUIDs(client *http.Client, apiDomain string, token string, para
 	}
 
 	paymentRes := payment.PaymentsMerchantUidResponse{}
-	err = protojson.Unmarshal(res, &paymentRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentRes)
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func GetByStatus(client *http.Client, apiDomain string, token string, params *pa
 	}
 
 	paymentRes := payment.PaymentStatusResponse{}
-	err = protojson.Unmarshal(res, &paymentRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentRes)
 	if err != nil {
 		return nil, err
 	}
@@ -199,7 +199,7 @@ func GetBalanceByImpUID(client *http.Client, apiDomain string, token string, par
 	}
 
 	paymentRes := payment.PaymentBalanceResponse{}
-	err = protojson.Unmarshal(res, &paymentRes)
+	err = util.Unmarshaler.Unmarshal(res, &paymentRes)
 	if err != nil {
 		return nil, err
 	}
@@ -228,7 +228,7 @@ func Cancel(client *http.Client, apiDomain string, token string, params *payment
 	}
 
 	cancelRes := payment.PaymentCancelResponse{}
-	err = protojson.Unmarshal(res, &cancelRes)
+	err = util.Unmarshaler.Unmarshal(res, &cancelRes)
 	if err != nil {
 		return nil, err
 	}
@@ -255,7 +255,7 @@ func Prepare(client *http.Client, apiDomain string, token string, params *paymen
 	}
 
 	prepareRes := payment.PaymentPrepareResponse{}
-	err = protojson.Unmarshal(res, &prepareRes)
+	err = util.Unmarshaler.Unmarshal(res, &prepareRes)
 	if err != nil {
 		return nil, err
 	}
@@ -275,7 +275,7 @@ func GetPrepareByMerchantUID(client *http.Client, apiDomain string, token string
 	}
 
 	prepareRes := payment.PaymentPrepareResponse{}
-	err = protojson.Unmarshal(res, &prepareRes)
+	err = util.Unmarshaler.Unmarshal(res, &prepareRes)
 	if err != nil {
 		return nil, err
 	}

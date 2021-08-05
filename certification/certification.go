@@ -6,7 +6,6 @@ import (
 
 	"github.com/iamport/go-iamport/util"
 	"github.com/iamport/interface/gen_src/go/v1/certification"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 const (
@@ -23,7 +22,7 @@ func GetCertifications(client *http.Client, apiDomain string, token string, para
 	}
 
 	certificationRes := certification.CertificationResponse{}
-	err = protojson.Unmarshal(res, &certificationRes)
+	err = util.Unmarshaler.Unmarshal(res, &certificationRes)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +40,7 @@ func DeleteCertifications(client *http.Client, apiDomain string, token string, p
 	}
 
 	certificationRes := certification.CertificationResponse{}
-	err = protojson.Unmarshal(res, &certificationRes)
+	err = util.Unmarshaler.Unmarshal(res, &certificationRes)
 	if err != nil {
 		return nil, err
 	}

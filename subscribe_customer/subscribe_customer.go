@@ -46,7 +46,7 @@ func GetMultipleBillingKeysByCustomer(client *http.Client, apiDomain string, tok
 	}
 
 	getBillingKeysRes := subscribe.GetMultipleCustomerBillingKeyResponse{}
-	err = protojson.Unmarshal(res, &getBillingKeysRes)
+	err = util.Unmarshaler.Unmarshal(res, &getBillingKeysRes)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ func DeleteBillingKey(client *http.Client, apiDomain string, token string, param
 	}
 
 	deleteBillingKeyRes := subscribe.DeleteCustomerBillingKeyResponse{}
-	err = protojson.Unmarshal(res, &deleteBillingKeyRes)
+	err = util.Unmarshaler.Unmarshal(res, &deleteBillingKeyRes)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func GetBillingKeyByCustomer(client *http.Client, apiDomain string, token string
 	}
 
 	getBillingKeyRes := subscribe.GetCustomerBillingKeyResponse{}
-	err = protojson.Unmarshal(res, &getBillingKeyRes)
+	err = util.Unmarshaler.Unmarshal(res, &getBillingKeyRes)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func InsertBillingKeyByCustomer(client *http.Client, apiDomain string, token str
 	}
 
 	insertBillingKeyRes := subscribe.InsertCustomerBillingKeyResponse{}
-	err = protojson.Unmarshal(res, &insertBillingKeyRes)
+	err = util.Unmarshaler.Unmarshal(res, &insertBillingKeyRes)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ func GetPaymentsByCustomer(client *http.Client, apiDomain string, token string, 
 	}
 
 	getPaymentRecordRes := subscribe.GetPaidByBillingKeyListResponse{}
-	err = protojson.Unmarshal(res, &getPaymentRecordRes)
+	err = util.Unmarshaler.Unmarshal(res, &getPaymentRecordRes)
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ func GetScheduledPaymentByCustomerUID(client *http.Client, apiDomain string, tok
 	}
 
 	scheduleRes := subscribe_dup.GetPaymentScheduleByCustomerResponse{}
-	err = protojson.Unmarshal(res, &scheduleRes)
+	err = util.Unmarshaler.Unmarshal(res, &scheduleRes)
 	if err != nil {
 		return nil, err
 	}

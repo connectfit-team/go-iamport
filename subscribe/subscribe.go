@@ -49,7 +49,7 @@ func Onetime(client *http.Client, apiDomain string, token string, params *subscr
 	}
 
 	onetimeRes := subscribe.OnetimePaymentResponse{}
-	err = protojson.Unmarshal(res, &onetimeRes)
+	err = util.Unmarshaler.Unmarshal(res, &onetimeRes)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func Again(client *http.Client, apiDomain string, token string, params *subscrib
 	}
 
 	againRes := subscribe.AgainPaymentResponse{}
-	err = protojson.Unmarshal(res, &againRes)
+	err = util.Unmarshaler.Unmarshal(res, &againRes)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ func Schedule(client *http.Client, apiDomain string, token string, params *subsc
 	}
 
 	scheduleRes := subscribe.SchedulePaymentResponse{}
-	err = protojson.Unmarshal(res, &scheduleRes)
+	err = util.Unmarshaler.Unmarshal(res, &scheduleRes)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ func Unschedule(client *http.Client, apiDomain string, token string, params *sub
 	}
 
 	unscheduleRes := subscribe.UnschedulePaymentResponse{}
-	err = protojson.Unmarshal(res, &unscheduleRes)
+	err = util.Unmarshaler.Unmarshal(res, &unscheduleRes)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func GetScheduledPaymentByMerchantUID(client *http.Client, apiDomain string, tok
 	}
 
 	scheduleRes := subscribe.GetPaymentScheduleResponse{}
-	err = protojson.Unmarshal(res, &scheduleRes)
+	err = util.Unmarshaler.Unmarshal(res, &scheduleRes)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ func GetScheduledPaymentByCustomerUID(client *http.Client, apiDomain string, tok
 	}
 
 	scheduleRes := subscribe.GetPaymentScheduleByCustomerResponse{}
-	err = protojson.Unmarshal(res, &scheduleRes)
+	err = util.Unmarshaler.Unmarshal(res, &scheduleRes)
 	if err != nil {
 		return nil, err
 	}
