@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"errors"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -27,6 +29,12 @@ const (
 	PUT    = "PUT"
 	DELETE = "DELETE"
 )
+
+var logger *log.Logger
+
+func init() {
+	logger = log.New(os.Stderr, "xxx: ", log.Ldate|log.Ltime|log.Lshortfile)
+}
 
 type Method string
 
@@ -96,6 +104,11 @@ func call(client *http.Client, req *http.Request) ([]byte, error) {
 	if err != nil {
 		return []byte{}, err
 	}
+	defer func() {
+		if err := res.Body.Close(); err != nil {
+			logger.Printf("res.body.close ", err)
+		}
+	}()
 
 	resBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
