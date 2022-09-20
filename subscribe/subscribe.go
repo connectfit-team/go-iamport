@@ -70,7 +70,7 @@ func Again(client *http.Client, apiDomain string, token string, params *subscrib
 		return nil, err
 	}
 
-	res, err := util.CallWithForm(client, token, url, util.POST, jsonBytes)
+	res, err := util.CallWithJson(client, token, url, util.POST, jsonBytes)
 	if err != nil {
 		return nil, err
 	}
