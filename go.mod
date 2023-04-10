@@ -1,4 +1,4 @@
-module github.com/iamport/go-iamport
+module github.com/connectfit-team/go-iamport
 
 go 1.16
 
