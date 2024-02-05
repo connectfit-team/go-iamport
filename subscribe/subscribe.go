@@ -1,10 +1,12 @@
 package subscribe
 
 import (
+	"encoding/json"
 	"net/http"
 	"strconv"
 	"strings"
 
+	"github.com/connectfit-team/go-iamport/types"
 	"google.golang.org/protobuf/encoding/protojson"
 
 	"github.com/iamport/go-iamport/util"
@@ -86,13 +88,10 @@ func Again(client *http.Client, apiDomain string, token string, params *subscrib
 
 // Schedule payemnt - POST /subscribe/payments/schedule
 // 지정된 스케줄에 결제를 예약합니다
-func Schedule(client *http.Client, apiDomain string, token string, params *subscribe.SchedulePayemntRequest) (*subscribe.SchedulePaymentResponse, error) {
+func Schedule(client *http.Client, apiDomain string, token string, params *types.SchedulePayemntRequest) (*subscribe.SchedulePaymentResponse, error) {
 	url := util.GetJoinString(apiDomain, URLSubscribe, URLPayments, URLSchedule)
 
-	marshaler := protojson.MarshalOptions{
-		UseProtoNames: true,
-	}
-	jsonBytes, err := marshaler.Marshal(params)
+	jsonBytes, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
 	}

@@ -3,10 +3,11 @@ package iamport
 import (
 	"errors"
 
+	"github.com/connectfit-team/go-iamport/types"
 	Typepayment "github.com/iamport/interface/gen_src/go/v1/payment"
 	TypeSubscribe "github.com/iamport/interface/gen_src/go/v1/subscribe"
 
-	"github.com/iamport/go-iamport/subscribe"
+	"github.com/connectfit-team/go-iamport/subscribe"
 	"github.com/iamport/go-iamport/util"
 )
 
@@ -137,7 +138,7 @@ func (iamport *Iamport) AgainPayment(
 func (iamport *Iamport) SchedulePayment(
 	customerUID string, checkingAmount int32,
 	cardNumber, expiry, birth, pwd2Digit, pg string,
-	schedules []*TypeSubscribe.PaymentScheduleParam,
+	schedules []*types.PaymentScheduleParam,
 ) ([]*TypeSubscribe.UnitSchedulePaymentResponse, error) {
 
 	if customerUID == "" {
@@ -149,7 +150,7 @@ func (iamport *Iamport) SchedulePayment(
 		return nil, err
 	}
 
-	req := &TypeSubscribe.SchedulePayemntRequest{
+	req := &types.SchedulePayemntRequest{
 		CustomerUid:    customerUID,
 		CheckingAmount: checkingAmount,
 		CardNumber:     cardNumber,

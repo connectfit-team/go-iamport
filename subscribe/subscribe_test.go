@@ -6,6 +6,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/connectfit-team/go-iamport/types"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/iamport/interface/gen_src/go/v1/subscribe"
@@ -29,7 +30,7 @@ const (
 	TodoCustomValue = ""
 )
 
-var TScheduleParams = &subscribe.PaymentScheduleParam{
+var TScheduleParams = &types.PaymentScheduleParam{
 	MerchantUid:   TMerchantUID,
 	ScheduleAt:    int32(time.Now().Unix() + 100000),
 	Amount:        TAmount,
@@ -144,13 +145,13 @@ func TestSchedule(t *testing.T) {
 		t.Error(err)
 	}
 
-	params := &subscribe.SchedulePayemntRequest{
+	params := &types.SchedulePayemntRequest{
 		CustomerUid: TCustomerUid + util.GetRandomString(20), // require
 		CardNumber:  TCardNumber,                             // require
 		Expiry:      TExpiry,                                 // require
 		Birth:       TBirth,                                  // require
 		Pwd_2Digit:  TPwd2Digit,
-		Schedules:   []*subscribe.PaymentScheduleParam{TScheduleParams}, // require
+		Schedules:   []*types.PaymentScheduleParam{TScheduleParams}, // require
 	}
 
 	scheduleRes, err := Schedule(auth.Client, auth.APIUrl, token, params)
