@@ -1,7 +1,10 @@
 package iamport
 
 import (
+	"encoding/json"
 	"errors"
+	"io"
+	"net/http"
 	"time"
 
 	"github.com/iamport/go-iamport/payment"
@@ -40,6 +43,55 @@ func (iamport *Iamport) GetPaymentImpUID(iuid string) (*TypePayment.Payment, err
 
 	return res.Response, nil
 }
+
+// GetPaymentImpUIDWithSandbox imp_uid로 결제 정보 가져오기 (샌드박스 포함 여부 선택 가능)
+func (iamport *Iamport) GetPaymentImpUIDWithSandbox(iuid string, isSandbox bool) (*TypePayment.Payment, error) {
+	if iuid == "" {
+		return nil, errors.New(ErrMustExistImpUID)
+	}
+
+	token, err := iamport.Authenticate.GetToken()
+	if err != nil {
+		return nil, err
+	}
+
+	url := iamport.Authenticate.APIUrl + "/payments/" + iuid
+	if isSandbox {
+		url += "?include_sandbox=true"
+	}
+
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", token)
+
+	resp, err := iamport.Authenticate.Client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, errors.New("iamport API code: " + http.StatusText(resp.StatusCode))
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var res TypePayment.PaymentResponse
+	if err := json.Unmarshal(body, &res); err != nil {
+		return nil, err
+	}
+
+	if res.Code != util.CodeOK {
+		return nil, errors.New(res.Message)
+	}
+
+	return res.Response, nil
+}
+
 
 // GetPaymentsImpUIDs 여러개의 imp_uid로 결제 정보 가져오기
 //
