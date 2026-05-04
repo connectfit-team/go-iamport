@@ -3,11 +3,8 @@ module github.com/connectfit-team/go-iamport
 go 1.16
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.0.0 // indirect
-	github.com/iamport/go-iamport v0.3.4 // indirect
+	github.com/iamport/go-iamport v0.3.4
 	github.com/iamport/interface v0.0.15-0.20210804063853-dafb6ede3aa1
 	github.com/stretchr/testify v1.6.1
-	google.golang.org/protobuf v1.26.0
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
+	google.golang.org/protobuf v1.33.0
 )
